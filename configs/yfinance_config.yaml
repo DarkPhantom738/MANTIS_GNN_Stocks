@@ -1,0 +1,46 @@
+project:
+  name: mantis_financial_ecosystem_graph_real_market
+  seed: 42
+  output_dir: outputs
+
+data:
+  mode: yfinance
+  start_date: "2025-01-01"
+  end_date: "2026-05-26"
+  tickers: ["NVDA", "AMD", "MSFT", "XOM", "JPM", "TSLA"]
+  sectors:
+    NVDA: "Semiconductor Sector"
+    AMD: "Semiconductor Sector"
+    MSFT: "Software Sector"
+    XOM: "Energy Sector"
+    JPM: "Banking Sector"
+    TSLA: "EV Sector"
+  etfs:
+    XLK: ["NVDA", "AMD", "MSFT"]
+    XLE: ["XOM"]
+    XLF: ["JPM"]
+    ARKK: ["TSLA", "NVDA"]
+  countries: ["United States", "China", "Taiwan", "Saudi Arabia"]
+  commodities: ["Oil Market", "Natural Gas", "Copper"]
+  currencies: ["USD", "CNY", "JPY"]
+
+features:
+  rolling_windows: [5, 14, 30]
+  graph_window_days: 30
+  correlation_threshold: 0.25
+  embedding_dim: 32
+
+training:
+  model: "graphsage"
+  epochs: 40
+  learning_rate: 0.005
+  weight_decay: 0.0001
+  hidden_dim: 64
+  dropout: 0.15
+  negative_samples: 2
+  temporal_consistency_weight: 0.1
+  checkpoint_path: outputs/checkpoints/yfinance_gnn.pt
+
+export:
+  final_csv: outputs/mantis_financial_ecosystem_dataset_yfinance.csv
+  sample_csv: data/sample/yfinance_sample_output.csv

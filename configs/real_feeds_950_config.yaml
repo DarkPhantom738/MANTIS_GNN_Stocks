@@ -1,0 +1,66 @@
+project:
+  name: mantis_financial_ecosystem_graph_real_feeds_950
+  seed: 42
+  output_dir: outputs
+
+data:
+  mode: real_feeds
+  start_date: "2026-01-01"
+  end_date: "2026-05-26"
+  universe:
+    source: sp500_plus_nasdaq
+    max_tickers: 950
+  tickers: ["NVDA", "AMD", "MSFT", "XOM", "JPM", "TSLA"]
+  sectors:
+    NVDA: "Semiconductor Sector"
+    AMD: "Semiconductor Sector"
+    MSFT: "Software Sector"
+    XOM: "Energy Sector"
+    JPM: "Banking Sector"
+    TSLA: "EV Sector"
+  etfs:
+    XLK: ["NVDA", "AMD", "MSFT", "AAPL", "AVGO", "CRM", "ORCL"]
+    XLE: ["XOM", "CVX", "COP", "EOG", "SLB"]
+    XLF: ["JPM", "BAC", "WFC", "GS", "MS", "C"]
+    SMH: ["NVDA", "AMD", "AVGO", "QCOM", "MU", "AMAT", "LRCX"]
+    ARKK: ["TSLA", "ROKU", "COIN", "SHOP", "SQ"]
+  countries: ["United States", "China", "Taiwan", "Saudi Arabia", "Russia", "Ukraine", "Japan", "Germany"]
+  commodities: ["Oil Market", "Natural Gas", "Copper"]
+  currencies: ["USD", "CNY", "JPY"]
+  market_series:
+    Oil Market: "CL=F"
+    Natural Gas: "NG=F"
+    Copper: "HG=F"
+    USD: "DX-Y.NYB"
+    CNY: "CNY=X"
+    JPY: "JPY=X"
+  gdelt:
+    max_records_per_topic: 250
+    topics:
+      Federal Reserve: "Federal Reserve interest rates inflation"
+      US CPI Release: "CPI inflation price index"
+      Middle East Conflict: "Middle East conflict oil shipping"
+      China Tariffs: "China tariffs trade restrictions"
+      AI Boom: "artificial intelligence semiconductors chips"
+
+features:
+  rolling_windows: [5, 14, 30]
+  graph_window_days: 30
+  correlation_threshold: 0.35
+  max_corr_edges_per_node: 20
+  embedding_dim: 32
+
+training:
+  model: "graphsage"
+  epochs: 25
+  learning_rate: 0.005
+  weight_decay: 0.0001
+  hidden_dim: 64
+  dropout: 0.15
+  negative_samples: 2
+  temporal_consistency_weight: 0.1
+  checkpoint_path: outputs/checkpoints/real_feeds_950_gnn.pt
+
+export:
+  final_csv: outputs/mantis_financial_ecosystem_dataset_real_feeds_950.csv
+  sample_csv: data/sample/real_feeds_950_sample_output.csv

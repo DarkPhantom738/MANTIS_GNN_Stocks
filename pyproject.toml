@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mantis-financial-graph"
+version = "0.1.0"
+description = "Temporal heterogeneous financial ecosystem graph-learning pipeline for MANTIS CSV exports."
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
