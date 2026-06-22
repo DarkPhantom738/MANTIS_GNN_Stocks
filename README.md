@@ -156,17 +156,6 @@ The embeddings can be used for:
 
 The project also exports graph-statistic columns such as PageRank, centrality, clustering, and local influence. Those are interpretable graph metrics. The `gnn_*` values are learned relational features that capture higher-dimensional structure beyond those single metrics.
 
-## If PyTorch Geometric Is Unavailable
-
-The project includes a deterministic fallback so the dataset can still be generated without a full GNN installation.
-
-The fallback:
-
-- combines numeric node features with the graph adjacency matrix
-- standardizes the combined matrix
-- projects it into the configured embedding dimension with truncated SVD
-
-Those fallback columns are still named `gnn_1...gnn_N` because they fill the same role in the final schema: latent graph-aware coordinates. The full GraphSAGE/GAT path is preferred when available.
 
 ## Why This Is Useful
 
