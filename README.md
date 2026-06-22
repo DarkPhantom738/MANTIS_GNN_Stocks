@@ -157,28 +157,6 @@ The embeddings can be used for:
 The project also exports graph-statistic columns such as PageRank, centrality, clustering, and local influence. Those are interpretable graph metrics. The `gnn_*` values are learned relational features that capture higher-dimensional structure beyond those single metrics.
 
 
-## Why This Is Useful
-
-The main value is that the dataset keeps both explanation and representation.
-
-The interpretable columns answer questions like:
-
-- Did volatility rise?
-- Was sentiment negative?
-- Did article volume spike?
-- Is this stock exposed to rates, tariffs, oil, or geopolitical conflict?
-- Is this node central in the market graph?
-
-The GNN columns answer a different kind of question:
-
-- Where does this entity sit in the full market ecosystem?
-- Which entities are structurally similar even if their raw prices differ?
-- Which stocks are becoming closer to a macro or geopolitical narrative?
-- Which clusters emerge from relationships rather than sector labels?
-- How does the latent market map shift across time?
-
-Together, those two views make the output useful for MANTIS-style manifold exploration, graph cartography, clustering, regime analysis, and research into financial contagion.
-
 ## Output Files
 
 The repository includes generated examples in `outputs/` and `data/sample/`.
